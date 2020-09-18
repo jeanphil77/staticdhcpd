@@ -29,14 +29,14 @@ import threading
 import time
 import traceback
 
-import config
-import statistics
+from . import config
+from . import statistics
 
 import libpydhcpserver.dhcp
 from libpydhcpserver.dhcp_types.ipv4 import IPv4
 from libpydhcpserver.dhcp_types.mac import MAC
 
-from databases.generic import Definition
+from .databases.generic import Definition
 
 #Packet-type string-constants
 _PACKET_TYPE_DECLINE = 'DECLINE'
@@ -111,12 +111,12 @@ class _PacketWrapper(object):
         try:
             self._evaluateSource()
             self._server.evaluateAbuse(self.mac)
-        except _PacketSourceUnacceptable, e:
+        except _PacketSourceUnacceptable as e:
             _logger.warn("Request from %(ip)s ignored: %(reason)s" % {
              'ip': self.giaddr,
              'reason': str(e),
             })
-        except _PacketSourceIgnored, e:
+        except _PacketSourceIgnored as e:
             _logger.debug("Request from %(mac)s ignored: %(reason)s" % {
              'mac': self.mac,
              'reason': str(e),
@@ -803,7 +803,7 @@ class _DHCPServer(libpydhcpserver.dhcp.DHCPServer):
         Cleans up the MAC blacklist and the abuse-monitoring list.
         """
         with self._lock:
-            for i in reversed(xrange(len(self._ignored_addresses))):
+            for i in reversed(range(len(self._ignored_addresses))):
                 ignored_address = self._ignored_addresses[i]
                 if ignored_address[1] <= 1:
                     del self._ignored_addresses[i]
@@ -812,7 +812,7 @@ class _DHCPServer(libpydhcpserver.dhcp.DHCPServer):
 
             if config.ENABLE_SUSPEND:
                 dead_keys = []
-                for (k, v) in self._dhcp_actions.iteritems():
+                for (k, v) in self._dhcp_actions.items():
                     if v <= 1:
                         dead_keys.append(k)
                     else:

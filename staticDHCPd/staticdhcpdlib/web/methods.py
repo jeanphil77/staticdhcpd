@@ -93,7 +93,7 @@ def reinitialise(*args, **kwargs):
     """
     try:
         time_elapsed = system.reinitialise()
-    except Exception, e:
+    except Exception as e:
         return '<span class="critical">Reinitilisation failed: %(error)s</span>' % {
          'error': str(e),
         }

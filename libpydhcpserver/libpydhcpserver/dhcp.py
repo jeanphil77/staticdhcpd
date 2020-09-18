@@ -30,10 +30,10 @@ import select
 import socket
 import threading
 
-from dhcp_types.ipv4 import IPv4
-from dhcp_types.mac import MAC
-from dhcp_types.packet import (DHCPPacket, FLAGBIT_BROADCAST)
-from dhcp_types.constants import (
+from .dhcp_types.ipv4 import IPv4
+from .dhcp_types.mac import MAC
+from .dhcp_types.packet import (DHCPPacket, FLAGBIT_BROADCAST)
+from .dhcp_types.constants import (
     FIELD_CIADDR, FIELD_YIADDR, FIELD_SIADDR, FIELD_GIADDR,
 )
 
@@ -110,7 +110,7 @@ class DHCPServer(object):
         """
         self._server_address = server_address
         if response_interface == '-':
-            import getifaddrslib
+            from . import getifaddrslib
             response_interface = getifaddrslib.get_network_interface(server_address)
         self._network_link = _NetworkLink(str(server_address), server_port, client_port, proxy_port, response_interface, response_interface_qtags=response_interface_qtags)
 
@@ -352,10 +352,10 @@ class _NetworkLink(object):
             })
 
         if server_address:
-            import getifaddrslib
+            from . import getifaddrslib
             listen_interface = getifaddrslib.get_network_interface(server_address)
             try:
-                dhcp_socket.setsockopt(socket.SOL_SOCKET, _SO_BINDTODEVICE, listen_interface)
+                dhcp_socket.setsockopt(socket.SOL_SOCKET, _SO_BINDTODEVICE, str.encode(listen_interface))
             except socket.error as msg:
                 raise OSError(msg.errno, 'Unable to limit listening to %(listen_interface)s: %(err)s' % {
                  'listen_interface': listen_interface,

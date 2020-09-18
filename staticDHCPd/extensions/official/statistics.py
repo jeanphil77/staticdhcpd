@@ -118,7 +118,7 @@ class Statistics(object):
         
         self._processing_time = 0.0
         
-        self._graph = collections.deque((None for i in xrange(graph_size)), maxlen=graph_size)
+        self._graph = collections.deque((None for i in range(graph_size)), maxlen=graph_size)
         self._gram_size = gram_size
         
         self._lock = threading.Lock()
@@ -201,7 +201,7 @@ class Statistics(object):
         writer.writerow(header)
         del header
         
-        null_record = ['0' for i in xrange(len(_METHODS) * 2)] + ['0', '0']
+        null_record = ['0' for i in range(len(_METHODS) * 2)] + ['0', '0']
         
         render_format = '%Y-%m-%d %H:%M:%S'
         with self._lock:
@@ -361,13 +361,13 @@ class Statistics(object):
                 processing_time = self._current_gram['processing-time']
                 timestamp = self._gram_start_time
                 
-                for i in xrange(1, min(window, len(self._graph)) + 1):
+                for i in range(1, min(window, len(self._graph)) + 1):
                     timestamp -= self._gram_size
                     gram = self._graph[-1 * i]
                     if not gram:
                         continue
                         
-                    for (k, v) in gram.dhcp_packets.iteritems():
+                    for (k, v) in gram.dhcp_packets.items():
                         packets[k] += v
                     packets_discarded += sum(gram.dhcp_packets_discarded.values())
                     other += gram.other_packets
@@ -462,7 +462,7 @@ if _CONFIG['GRAPH_ENABLED']:
     try:
         import pycha.line
         import cairo
-    except ImportError, e:
+    except ImportError as e:
         _logger.warn("pycha is not available; graphs cannot be rendered: " + str(e))
     else:
         config.callbacks.webAddMethod(

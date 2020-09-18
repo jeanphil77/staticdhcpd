@@ -189,7 +189,7 @@ class CachingDatabase(Database):
         self._resource_lock = threading.BoundedSemaphore(concurrency_limit)
         try:
             self._setupCache()
-        except Exception, e:
+        except Exception as e:
             _logger.error("Cache initialisation failed:\n" + traceback.format_exc())
 
     def _setupCache(self):
@@ -211,7 +211,7 @@ class CachingDatabase(Database):
                         else:
                             _logger.debug("Setting up memory-cache on top of persistent caching database")
                             self._cache = _caching.MemoryCache('memory', chained_cache=disk_cache)
-                    except Exception, e:
+                    except Exception as e:
                         _logger.error("Unable to initialise disk-based caching:\n" + traceback.format_exc())
                         if config.PERSISTENT_CACHE and not config.CACHE_ON_DISK:
                             _logger.warn("Persistent caching is not available")
@@ -245,14 +245,14 @@ class CachingDatabase(Database):
         if self._cache:
             try:
                 self._cache.reinitialise()
-            except Exception, e:
+            except Exception as e:
                 _logger.error("Cache reinitialisation failed:\n" + traceback.format_exc())
 
     def lookupMAC(self, mac):
         if self._cache:
             try:
                 definition = self._cache.lookupMAC(mac)
-            except Exception, e:
+            except Exception as e:
                 _logger.error("Cache lookup failed:\n" + traceback.format_exc())
             else:
                 if definition:
@@ -263,7 +263,7 @@ class CachingDatabase(Database):
         if definition and self._cache:
             try:
                 self._cache.cacheMAC(mac, definition)
-            except Exception, e:
+            except Exception as e:
                 _logger.error("Cache update failed:\n" + traceback.format_exc())
         return definition
 

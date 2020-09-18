@@ -160,7 +160,7 @@ class _HTTPLogic(object):
                 'mac': str(mac),
             })
             results = json.loads(response.read())
-        except Exception, e:
+        except Exception as e:
             _logger.error("Failed to lookup '%(mac)s' on '%(uri)s': %(error)s" % {
                 'uri': self._uri,
                 'mac': str(mac),

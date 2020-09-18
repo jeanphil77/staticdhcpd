@@ -211,7 +211,7 @@ class DynamicPool(object):
             #Filter out duplicates
             allocated_ips = set(ip for (_, ip) in self._map.itervalues())
             duplicate_ips = []
-            for (ip, ip_obj) in ips.iteritems():
+            for (ip, ip_obj) in ips.items():
                 if ip_obj in self._pool or ip_obj in allocated_ips:
                     duplicate_ips.append(ip)
             if duplicate_ips:
@@ -234,7 +234,7 @@ class DynamicPool(object):
                         ip = answer[0].payload.fields['pdst']
                         mac = answer[1].fields['src'].lower()
                         ip_obj = ips.pop(ip)
-                    except Exception, e:
+                    except Exception as e:
                         self._logger.debug("Unable to use ARP-discovered binding %(binding)r: %(error)s" % {
                          'binding': answer,
                          'error': str(e),
@@ -310,7 +310,7 @@ class DynamicPool(object):
         """
         elements = []
         with self._lock:
-            for (mac, (expiration, ip)) in self._map.iteritems():
+            for (mac, (expiration, ip)) in self._map.items():
                 elements.append(_LeaseDefinition(ip, mac, expiration, expiration - self._lease_time))
             for ip in self._pool:
                 elements.append(_LeaseDefinition(ip, None, None, None))
@@ -348,7 +348,7 @@ class DynamicPool(object):
                 return "No leases yet assigned; %(count)i IPs available" % {'count': len(self._pool)}
                 
             elements = []
-            for (mac, (expiration, ip)) in sorted(self._map.iteritems(), key=(lambda element: element[1])):
+            for (mac, (expiration, ip)) in sorted(self._map.items(), key=(lambda element: element[1])):
                 elements.append("""
                 <tr>
                     <td>%(ip)s</td>
@@ -389,7 +389,7 @@ class DynamicPool(object):
         """
         current_time = time.time()
         dead_records = []
-        for (mac, (expiration, ip)) in self._map.iteritems():
+        for (mac, (expiration, ip)) in self._map.items():
             if current_time - expiration > self._lease_time: #Kill it
                 dead_records.append((mac, ip))
                 

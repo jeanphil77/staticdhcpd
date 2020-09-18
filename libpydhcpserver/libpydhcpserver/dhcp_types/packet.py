@@ -294,7 +294,7 @@ class DHCPPacket(object):
         for (i, option_id) in enumerate(option_ordering):
             value = options[option_id]
             if self.word_align:
-                for i in xrange(len(value) % self._word_size):
+                for i in range(len(value) % self._word_size):
                     value.append(0) #Add a pad
                     
             if size_limit - len(value) >= 0: #Ensure that there's still space
@@ -341,7 +341,7 @@ class DHCPPacket(object):
         payload.extend((0, 0, 0)) #Space for option 52
         if self.terminal_pad:
             terminal_pad_size = min(len(value) % self._word_size, size_limit)
-            payload.extend(0 for i in xrange(terminal_pad_size)) #Add trailing pads
+            payload.extend(0 for i in range(terminal_pad_size)) #Add trailing pads
         else:
             terminal_pad_size = 0
             
@@ -635,7 +635,7 @@ class DHCPPacket(object):
             (start, length) = DHCP_FIELDS[option]
             padding = None
             if len(value) < length and option in DHCP_FIELDS_TEXT:
-                padding = (0 for i in xrange(length - len(value)))
+                padding = (0 for i in range(length - len(value)))
             elif not len(value) == length:
                 raise ValueError("Expected a value of length %(length)i, not %(value-length)i: %(value)r" % {
                  'length': length,

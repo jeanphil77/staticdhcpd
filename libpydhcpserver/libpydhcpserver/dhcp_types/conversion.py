@@ -207,7 +207,7 @@ def listToIPs(l):
     :except ValueError: The list could not be processed.
     """
     ips = []
-    for i in range(len(l) / 4):
+    for i in range(len(l) // 4):
         p = i * 4
         ips.append(listToIP(l[p:p + 4]))
     return ips

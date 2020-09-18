@@ -280,11 +280,11 @@ class DiskCache(_DatabaseCache):
     def _disconnect(self, database, cursor):
         try:
             cursor.close()
-        except Exception, e:
+        except Exception as e:
             _logger.warn("Unable to close cache cursor: " + str(e))
         try:
             database.close()
-        except Exception, e:
+        except Exception as e:
             _logger.warn("Unable to close cache database: " + str(e))
 
     def _setupDatabase(self):

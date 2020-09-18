@@ -187,7 +187,7 @@ _defaults.update({
 for key in [k for k in dir(conf) if k.isupper()]: #Copy everything that looks like a constant.
     globals()[key] = getattr(conf, key)
 
-for (key, value) in _defaults.iteritems():
+for (key, value) in _defaults.items():
     if not key in globals():
         globals()[key] = value
 del _defaults
@@ -316,9 +316,9 @@ conf.logger = logger
 del logger
 del logging
 
-import system
-import statistics
-import web
+from . import system
+from . import statistics
+from . import web
 class callbacks(object):
     """
     A data-namespace, used to isolate callback-management functions.

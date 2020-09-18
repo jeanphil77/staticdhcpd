@@ -147,7 +147,7 @@ class _FeedHandler(logging.Handler):
         events = []
         self.acquire()
         try:
-            for i in xrange(min(limit, len(self._records))):
+            for i in range(min(limit, len(self._records))):
                 (record, uid) = self._records[i]
                 events.append(_Event(record.msg, record.levelname, record.created, record.name, record.lineno, uid))
         finally:

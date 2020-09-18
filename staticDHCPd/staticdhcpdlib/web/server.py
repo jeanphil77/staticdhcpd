@@ -162,7 +162,7 @@ def _validateCredentials(parameters, method):
             }).hexdigest()
             
         return target == parameters['response'].lower()
-    except Exception, e:
+    except Exception as e:
         raise ValueError("Authorization data from client is not spec-compliant: " + str(e))
         
 def _isSecure(headers, method):
@@ -266,11 +266,11 @@ def _webMethod(method):
                     self.send_header('Cache-Control', 'max-age=0, no-cache, must-revalidate, proxy-revalidate')
                 self.end_headers()
                 self.wfile.write(data)
-            except _NotFound, e:
+            except _NotFound as e:
                 _logger.debug("Request made for unbound path: %(path)s" % {
                  'path': str(e),
                 })
-            except _RequestAuthorizationRequired, e:
+            except _RequestAuthorizationRequired as e:
                 _logger.debug("Authentication required to access %(path)s: %(nonce)s" % {
                  'path': self.path,
                  'nonce': e.nonce,
