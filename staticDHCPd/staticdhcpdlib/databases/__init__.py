@@ -48,19 +48,19 @@ def get_database():
         from .generic import Null
         return Null()
     elif config.DATABASE_ENGINE == 'SQLite':
-        from _sql import SQLite
+        from ._sql import SQLite
         return SQLite()
     elif config.DATABASE_ENGINE == 'PostgreSQL':
-        from _sql import PostgreSQL
+        from ._sql import PostgreSQL
         return PostgreSQL()
     elif config.DATABASE_ENGINE == 'MySQL':
-        from _sql import MySQL
+        from ._sql import MySQL
         return MySQL()
     elif config.DATABASE_ENGINE == 'Oracle':
-        from _sql import Oracle
+        from ._sql import Oracle
         return Oracle()
     elif config.DATABASE_ENGINE == 'INI':
-        from _ini import INI
+        from ._ini import INI
         return INI()
         
     raise ValueError("Unknown database engine: %(engine)s" % {
