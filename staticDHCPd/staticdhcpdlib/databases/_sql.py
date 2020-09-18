@@ -27,7 +27,7 @@ import logging
 
 from .. import config
 
-from generic import (Definition, CachingDatabase)
+from .generic import (Definition, CachingDatabase)
 
 _logger = logging.getLogger("databases._sql")
 _extra = []

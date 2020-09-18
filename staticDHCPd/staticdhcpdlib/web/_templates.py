@@ -28,7 +28,7 @@ import datetime
 import traceback
 
 from .. import config
-import functions
+from . import functions
 
 import staticdhcpdlib
 import libpydhcpserver

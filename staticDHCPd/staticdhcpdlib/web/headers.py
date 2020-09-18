@@ -25,7 +25,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 import logging
 
 from .. import config
-import functions
+from . import functions
 
 _logger = logging.getLogger('web.headers')
 

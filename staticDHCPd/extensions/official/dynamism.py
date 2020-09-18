@@ -209,7 +209,7 @@ class DynamicPool(object):
         ips = dict((ip, IPv4(ip)) for ip in ips)
         with self._lock:
             #Filter out duplicates
-            allocated_ips = set(ip for (_, ip) in self._map.itervalues())
+            allocated_ips = set(ip for (_, ip) in self._map.values())
             duplicate_ips = []
             for (ip, ip_obj) in ips.items():
                 if ip_obj in self._pool or ip_obj in allocated_ips:
@@ -252,7 +252,7 @@ class DynamicPool(object):
                  'count': mapped_ips,
                  'name': self._hostname_prefix,
                 })
-            self._pool.extend(ips.itervalues())
+            self._pool.extend(ips.values())
             total = len(self._pool) + len(self._map)
         self._logger.debug("Added IPs to dynamic pool '%(name)s': %(ips)s" % {
          'ips': str(list(sorted(ips.values()))),
@@ -321,9 +321,9 @@ class DynamicPool(object):
         Provides every lease in the system, as a CSV document.
         """
         import csv
-        import StringIO
+        from io import StringIO
         
-        output = StringIO.StringIO()
+        output = StringIO()
         writer = csv.writer(output)
         writer.writerow(('ip', 'mac', 'expiration', 'last seen'))
         render_format = '%Y-%m-%d %H:%M:%S'

@@ -33,6 +33,7 @@ import traceback
 
 import staticdhcpdlib
 import libpydhcpserver
+import staticdhcpdlib.system
 
 parser_options = None
 #Options-processing needs to be done before config is loaded

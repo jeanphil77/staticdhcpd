@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 (C) Neil Tallim, 2014 <flan@uguu.ca>
 Inspiration derived from a discussion with John Stowers
 """
-import ConfigParser
+from configparser import ConfigParser
 import logging
 import re
 import threading
@@ -32,7 +32,7 @@ from libpydhcpserver.dhcp_types.mac import MAC
 
 from .. import config
 
-from generic import (Definition, Database)
+from .generic import (Definition, Database)
 
 _logger = logging.getLogger("databases._ini")
 

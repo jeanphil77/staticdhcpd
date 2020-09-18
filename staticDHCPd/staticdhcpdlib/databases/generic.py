@@ -38,7 +38,7 @@ import logging
 import threading
 import traceback
 
-import libpydhcpserver.dhcp_types.conversion
+from libpydhcpserver.dhcp_types import conversion
 from libpydhcpserver.dhcp_types.ipv4 import IPv4
 
 _logger = logging.getLogger('databases.generic')

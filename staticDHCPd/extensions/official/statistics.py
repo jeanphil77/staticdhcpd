@@ -190,9 +190,9 @@ class Statistics(object):
         self._update_graph()
         
         import csv
-        import StringIO
+        from io import StringIO
         
-        output = StringIO.StringIO()
+        output = StringIO()
         writer = csv.writer(output)
         header = ['time']
         header.extend(_METHODS)
@@ -225,7 +225,7 @@ class Statistics(object):
         """
         self._update_graph()
         
-        import StringIO
+        from io import StringIO
         data = []
         max_value = 0.01
         with self._lock:
@@ -240,7 +240,7 @@ class Statistics(object):
                 else:
                     data.append((i, 0))
                     
-        output = StringIO.StringIO()
+        output = StringIO()
         surface = cairo.ImageSurface(cairo.FORMAT_RGB24, dimensions[0], dimensions[1])
         
         options = {

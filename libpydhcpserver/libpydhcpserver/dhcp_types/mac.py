@@ -33,8 +33,11 @@ try:
     IntegerTypes = (int, long)
 except (ImportError, NameError): #py3k
     pass
-    
+
 from .conversion import (listToNumber)
+
+def cmp(a, b):
+    return (a > b) - (a < b)
 
 class MAC(object):
     """

@@ -35,14 +35,14 @@ import traceback
 import uuid
 
 try:
-    from urlparse import parse_qs
+    from urllib.parse import parse_qs
 except ImportError:
     from cgi import parse_qs
 
 from staticdhcpdlib.web import retrieveMethodCallback
 
 from .. import config
-import _templates
+from . import _templates
 from . import (WEB_METHOD_DASHBOARD, WEB_METHOD_TEMPLATE, WEB_METHOD_RAW)
 
 _logger = logging.getLogger('web.server')

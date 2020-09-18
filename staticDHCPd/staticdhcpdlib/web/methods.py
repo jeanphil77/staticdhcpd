@@ -27,8 +27,8 @@ import logging
 from .. import config
 from .. import logging_handlers
 from ..import system
-import functions
-import _resources
+from . import functions
+from . import _resources
 
 _logger = logging.getLogger('web.methods')
 

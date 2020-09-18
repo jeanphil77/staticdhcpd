@@ -38,6 +38,9 @@ from .conversion import (longToList, listToLong)
 
 _MAX_IP_INT = 4294967295
 
+def cmp(a, b):
+    return (a > b) - (a < b)
+
 class IPv4(object):
     """
     An abstract IPv4 address that can be realised as a sequence of bytes, a

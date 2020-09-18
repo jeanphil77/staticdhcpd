@@ -749,7 +749,7 @@ class _L2Responder_pcap(_L2Responder):
         self._c_int_ = ctypes.c_int
         import ctypes.util
 
-        import getifaddrslib
+        from . import getifaddrslib
         
         pcap = ctypes.util.find_library('pcap')
         if not pcap:

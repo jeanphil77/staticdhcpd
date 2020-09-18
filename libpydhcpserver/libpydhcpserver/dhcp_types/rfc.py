@@ -30,6 +30,10 @@ except ImportError: #py3k
     
 from .conversion import (intToList, longToList)
 from .ipv4 import IPv4
+from libpydhcpserver.dhcp_types import conversion
+
+def cmp(a, b):
+    return (a > b) - (a < b)
 
 def rfc3046_decode(s):
     """
